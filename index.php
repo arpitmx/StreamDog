@@ -1,7 +1,10 @@
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
@@ -20,12 +23,12 @@
   firebase.initializeApp(firebaseConfig);
 
   var myname = prompt("Enter your name!")
-  
+
   function sendMessage(){
 
     var message = document.getElementById("message").value;
-
-    firebase.database.ref("messages").push.set({
+    document.getElementById("messagebox");
+    firebase.database().ref("messages").push().set({
         "sender":myname,
         "message":message
     });
@@ -33,15 +36,29 @@
     return false;
   }
 
+  firebase.database().ref("messages").on("child_added", function(snapshot){
+    var html = "";
+    html += "<li>";
+      html += snapshot.val().sender + ": "+ snapshot.val().message;
+    html += "</li";
+    
+    document.getElementById("messages").innerHTML += html;
+  });
+
+
+
+
 
 </script>
 
 
-<form onsubmit="return sendMessage();">
+<form id = "messagebox" onsubmit="return sendMessage();">
 <input id = "message" placeholder = "Enter message here" autocomplete="off">
 <input type = "submit">
 
 
 </form>
+
+<ul id="messages"></ul>
 
 
