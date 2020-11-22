@@ -36,6 +36,7 @@
     return false;
   }
 
+
   firebase.database().ref("messages").on("child_added", function(snapshot){
     var html = "";
     html += "<li>";
@@ -44,9 +45,6 @@
     
     document.getElementById("messages").innerHTML += html;
   });
-
-
-
 
 
 </script>
@@ -60,5 +58,8 @@
 </form>
 
 <ul id="messages"></ul>
+
+
+
 
 
