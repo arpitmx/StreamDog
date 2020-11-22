@@ -10,3 +10,4 @@ var player = videojs("videoPlayer",{
 });
 var videoat = player.currentTime();
 console.log("Video at :",videoat)
+
